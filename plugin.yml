@@ -1,0 +1,8 @@
+name: PrisonCells
+main: com.pwncraftpvp.prisoncells.core.Main
+description: Prison Cells!
+author: JjPwN1
+version: 1.0
+commands:
+   cell:
+      description: PrisonCells main command
