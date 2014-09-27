@@ -3,6 +3,7 @@ package com.pwncraftpvp.prisoncells.core;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -26,11 +27,21 @@ public class PPlayer {
 		player = p;
 	}
 	
+	String playerName;
+	public PPlayer(String p){
+		playerName = p;
+	}
+	
 	/**
 	 * Get the player's file
 	 */
+	@SuppressWarnings("deprecation")
 	public File getFile(){
-		return new File(main.getDataFolder() + File.separator + "players", player.getUniqueId() + ".yml");
+		if(player != null){
+			return new File(main.getDataFolder() + File.separator + "players", player.getUniqueId() + ".yml");
+		}else{
+			return new File(main.getDataFolder() + File.separator + "players", Bukkit.getOfflinePlayer(playerName).getUniqueId() + ".yml");
+		}
 	}
 	
 	/**
@@ -86,6 +97,10 @@ public class PPlayer {
 	public void sendCommandHelp(){
 		this.sendMessageHeader("Command Help");
 		this.sendMessage(yellow + "/cell home " + gray + "- Return to your cell!");
+		if(player.isOp() == true){
+			this.sendMessage(yellow + "/cell home <player> " + gray + "- Go to a player's cell!");
+			this.sendMessage(yellow + "/cell setprice <price> " + gray + "- Set the price of a cell!");
+		}
 	}
 	
 	/**
