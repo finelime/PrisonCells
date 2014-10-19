@@ -43,7 +43,12 @@ public class Main extends JavaPlugin{
 			this.getConfig().set("doNotChangeMe", true);
 			this.saveConfig();
 		}
-		Bukkit.getWorld("Cells").setTime(6000);
+		this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
+			public void run(){
+				Bukkit.getWorld("Cells").setTime(6000);
+				Bukkit.getWorld("Cells").setWeatherDuration(0);
+			}
+		}, 100, 100);
 	}
 	
 	@SuppressWarnings("deprecation")
